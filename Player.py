@@ -8,7 +8,7 @@ kirprogfrog@gmail.com
 class Player:
     _money = 1000
     _carma = 50
-    everyday_pay = 0
+    _everyday_pay = 0
 
     instance = None
 
@@ -49,11 +49,11 @@ class Player:
             print("Отношение:", self.get_carma())
 
     def increase_everyday_pay(self, val):
-        self.everyday_pay += val
+        self._everyday_pay += val
 
     def pay_everyday_pay(self):
-        self._money -= self.everyday_pay
-        print("С казны было списано", self.everyday_pay, "золота на ежедневные расходы")
+        self._money -= self._everyday_pay
+        print("С казны было списано", self._everyday_pay, "золота на ежедневные расходы")
         print("Деньги:", self.get_money())
 
     def get_money(self):

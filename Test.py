@@ -1,4 +1,3 @@
-
 """
 Authored by
 kirprogfrog@gmail.com
@@ -61,6 +60,14 @@ def test():
                 print("Не могу вас понять, ваше сиятельство")
 
 
+# Функция, определяющая есть ли определённый класс в списке
+def is_class_in_list(active_events, wished):
+    for obj in active_events:
+        if type(obj) == type(wished):
+            return True
+    return False
+
+
 class GameController:
     events = []
     active_everyday_pay_events = []
@@ -85,17 +92,21 @@ class GameController:
     # Makes random event
     def make_random_event(self):
         random_event = self.events[random.randint(0, len(self.events) - 1)]
-        # FIXME
-        # TODO: Check if line 'type(random_event) not in self.active_everyday_pay_events'
-        #  works in that way which I wanted to
         """
         Если сгенерированный ивент является потомком класса
         EveryDayPayEvent и не находится в списке активных ивентов,
-        то выполнить:
+        то добавляем желаемый ивент в список активных
         """
-        if isinstance(random_event, EveryDayPayEvent) and type(random_event) not in self.active_everyday_pay_events:
+        if isinstance(random_event, EveryDayPayEvent) and not is_class_in_list(self.active_everyday_pay_events,
+                                                                               random_event):
             self.active_everyday_pay_events.append(random_event)
-        random_event.make()
+            random_event.make()
+        """
+        Если сгенерированный ивент не является потомком класса
+        EveryDayPayEvent, то просто запускаем, а иначе - ничего не делаем
+        """
+        if not isinstance(random_event, EveryDayPayEvent):
+            random_event.make()
 
 
 # Call testing method
