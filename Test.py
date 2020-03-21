@@ -54,8 +54,8 @@ def test():
                     print("Нет ежедневных расходов")
                 else:
                     print("Ежедневные расходы:")
-                    for k in controller.active_everyday_pay_events:
-                        k.show_cost()
+                    for pay_event in controller.active_everyday_pay_events:
+                        pay_event.show_cost()
             else:
                 print("Не могу вас понять, ваше сиятельство")
 

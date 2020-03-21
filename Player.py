@@ -53,8 +53,9 @@ class Player:
 
     def pay_everyday_pay(self):
         self._money -= self._everyday_pay
-        print("С казны было списано", self._everyday_pay, "золота на ежедневные расходы")
-        print("Деньги:", self.get_money())
+        if self._everyday_pay > 0:
+            print("С казны было списано", self._everyday_pay, "золота на ежедневные расходы")
+            print("Деньги:", self.get_money())
 
     def get_money(self):
         return self._money
