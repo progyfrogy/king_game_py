@@ -1,10 +1,10 @@
-
 """
 Authored by
 kirprogfrog@gmail.com
 """
 
 import random
+from Player import *
 
 
 class Event:
@@ -13,12 +13,11 @@ class Event:
     variable(Player class) which sets in
     constructor (__init__ method)
     """
-    player = None
+    player = Player()
     name = ""
 
-    def __init__(self, player):
+    def __init__(self):
         print(self.name, "был создан")
-        self.player = player
 
     def make(self):
         pass
@@ -153,18 +152,49 @@ class DyingCitizenEvent(ChoiceEvent):
 
 class EveryDayPayEvent(Event):
     everyday_pay = 0
+    min_length = 0
+    max_length = 0
+    passed_days = 0
+
+    name = "Every Day Pay Event"
+
+    def __init__(self):
+        super().__init__()
+        self.length = random.randint(self.min_length, self.max_length)
 
     def show_cost(self):
         pass
 
+    def is_passed(self):
+        if self.passed_days == self.length:
+            return True
+        else:
+            return False
+
 
 class War(EveryDayPayEvent):
     everyday_pay = 25
+    length = 10
+    min_length = 10
+    max_length = 18
+    passed_days = 0
+
+    name = "War"
+
+    def __init__(self):
+        super().__init__()
 
     def show_cost(self):
         print("Война:", self.everyday_pay)
 
     def make(self):
-        print("Началась война")
+        print("Началась война:", self.length)
         print("Каждый ход с вашей казны будет поступать по 25 золота на содержание войск")
         self.player.increase_everyday_pay(self.everyday_pay)
+
+    def increment_passed_days(self):
+        self.passed_days += 1
+
+    @staticmethod
+    def say_last_words():
+        print("Война закончилась!")
