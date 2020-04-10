@@ -55,7 +55,7 @@ class GameController:
     def fill_events_list(self):
         # Создание игрока
         pl = Player()
-        # Заполняем массив ивентов
+        # Инициализация ивентов
         self.events.append(VulcanoEvent())
         self.events.append(RaidEvent())
         self.events.append(FestEvent())

@@ -174,7 +174,6 @@ class EveryDayPayEvent(Event):
 
 class War(EveryDayPayEvent):
     everyday_pay = 25
-    length = 10
     min_length = 10
     max_length = 18
     passed_days = 0
