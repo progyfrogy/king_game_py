@@ -17,7 +17,8 @@ class Event:
     name = ""
 
     def __init__(self):
-        print(self.name, "был создан")
+        # print(self.name, "был создан")
+        pass
 
     def make(self):
         pass
@@ -63,6 +64,14 @@ class ChoiceEvent(Event):
             except:
                 print("Введите 1 или 2")
 
+    def do_yes_or_no(self):
+        a = self.get_player_choice()
+
+        if a == 1:
+            self.yes()
+        elif a == 2:
+            self.no()
+
     def yes(self):
         pass
 
@@ -82,11 +91,11 @@ class ChoiceEvent(Event):
 class CitizensPaymentIncreaseEvent(ChoiceEvent):
 
     def yes(self):
-        self.player.decrease_carma(5)
-
-    def no(self):
         self.player.increase_carma(5)
         self.player.decrease_money(100)
+
+    def no(self):
+        self.player.decrease_carma(5)
 
     def do_negative(self):
         pass
@@ -99,12 +108,7 @@ class CitizensPaymentIncreaseEvent(ChoiceEvent):
         print("Повысить горожанам зарплаты?")
         print("Введите '1' если Да и '2' если Нет")
 
-        a = self.get_player_choice()
-
-        if a == 1:
-            self.no()
-        elif a == 2:
-            self.yes()
+        self.do_yes_or_no()
 
 
 class DyingCitizenEvent(ChoiceEvent):
@@ -142,12 +146,7 @@ class DyingCitizenEvent(ChoiceEvent):
         print("Помочь горожанину?")
         print("Введите '1' если Да и '2' если Нет")
 
-        player_choice = self.get_player_choice()
-
-        if player_choice == 1:
-            self.yes()
-        else:
-            self.no()
+        self.do_yes_or_no()
 
 
 class EveryDayPayEvent(Event):
@@ -155,6 +154,7 @@ class EveryDayPayEvent(Event):
     min_length = 0
     max_length = 0
     passed_days = 0
+    length = 0
 
     name = "Every Day Pay Event"
 

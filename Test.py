@@ -47,6 +47,14 @@ def is_class_in_list(active_events, wished):
     return False
 
 
+# Функция, определяющая индекс класса в списке
+def index_of_class_in_list(active_events: list, wished: object):
+    for obj in enumerate(active_events):
+        if type(obj[1]) == type(wished):
+            return obj[0]
+    return -1
+
+
 class GameController:
     events = []
     active_everyday_pay_events = []
@@ -93,6 +101,10 @@ class GameController:
         print("Начать следующий день - next")
         print("Выйти из игры - exit")
         print("Посмотреть ежедневные расходы - everyday")
+
+        if is_class_in_list(self.active_everyday_pay_events, War()):
+            print("Посмотреть кол-во дней до окончания войны - days_of_war")
+
         # command cycle
         while True:
             inp = input()
@@ -116,6 +128,11 @@ class GameController:
                     print("Ежедневные расходы:")
                     for pay_event in self.active_everyday_pay_events:
                         pay_event.show_cost()
+            elif inp == 'days_of_war':
+                # Получаем активный War ивент(объект) из списка активных ивентов
+                war_event = self.active_everyday_pay_events[index_of_class_in_list(self.active_everyday_pay_events, War())]
+
+                print("Кол-во дней до окончания войны: ", war_event.length - war_event.passed_days)
             else:
                 print("Не могу вас понять, ваше сиятельство")
 
