@@ -1,4 +1,3 @@
-
 """
 Authored by
 kirprogfrog@gmail.com

@@ -190,11 +190,11 @@ class War(EveryDayPayEvent):
         super().__init__()
 
     def show_cost(self):
-        print("Война:", self.everyday_pay, "золота")
+        print("Война:", self.everyday_pay, "золота в день")
 
     def make(self):
         print("Началась война:", self.length, "дней")
-        print("Каждый ход с вашей казны будет поступать по 25 золота на содержание войск")
+        print("Каждый ход с вашей казны будет поступать по", self.everyday_pay, "золота на содержание войск")
         self.player.increase_everyday_pay(self.everyday_pay)
 
     def say_last_words(self):
@@ -214,11 +214,11 @@ class RatsEvent(EveryDayPayEvent):
         super().__init__()
 
     def show_cost(self):
-        print("Крысы на складе:", self.everyday_pay)
+        print("Крысы на складе:", self.everyday_pay, "золота в день")
 
     def make(self):
         print("Завелись крысы на складе!:", self.length, "дней")
-        print("Каждый ход с вашей казны будет поступать по 10 золота на покупки химикатов")
+        print("Каждый ход с вашей казны будет поступать по", self.everyday_pay, "золота на покупки химикатов")
         self.player.increase_everyday_pay(self.everyday_pay)
 
     def say_last_words(self):

@@ -67,12 +67,10 @@ class GameController:
         # Создание игрока
         pl = Player()
         # Инициализация ивентов
-        '''
         self.events.append(VulcanoEvent())
         self.events.append(RaidEvent())
         self.events.append(FestEvent())
         self.events.append(CitizensPaymentIncreaseEvent())
-        '''
         self.events.append(DyingCitizenEvent())
         self.events.append(War())
         self.everyday_pay_events.append(War())
@@ -89,9 +87,8 @@ class GameController:
         """
         Если сгенерированный ивент является потомком класса
         EveryDayPayEvent и не находится в списке активных ивентов,
-        то добавляем желаемый ивент в список активных
-        """
-        """
+        то добавляем желаемый ивент в список активных, а иначе:
+        
         Если сгенерированный ивент не является потомком класса
         EveryDayPayEvent, то просто запускаем, а иначе - рекурсивный вызов данной функции
         """
