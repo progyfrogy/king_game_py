@@ -131,7 +131,6 @@ class DyingCitizenEvent(ChoiceEvent):
 
         ''' 40% на неудачу '''
         if rand_int == 0 or rand_int == 1 or rand_int == 2 or rand_int == 3:
-            print(rand_int)
             print("Неудача")
             self.do_negative()
         else:
@@ -171,12 +170,19 @@ class EveryDayPayEvent(Event):
         else:
             return False
 
+    def increment_passed_days(self):
+        self.passed_days += 1
+
+    def say_last_words(self):
+        pass
+
 
 class War(EveryDayPayEvent):
     everyday_pay = 25
     min_length = 10
     max_length = 18
     passed_days = 0
+    length = 0
 
     name = "War"
 
@@ -184,16 +190,36 @@ class War(EveryDayPayEvent):
         super().__init__()
 
     def show_cost(self):
-        print("Война:", self.everyday_pay)
+        print("Война:", self.everyday_pay, "золота")
 
     def make(self):
-        print("Началась война:", self.length)
+        print("Началась война:", self.length, "дней")
         print("Каждый ход с вашей казны будет поступать по 25 золота на содержание войск")
         self.player.increase_everyday_pay(self.everyday_pay)
 
-    def increment_passed_days(self):
-        self.passed_days += 1
-
-    @staticmethod
     def say_last_words():
         print("Война закончилась!")
+
+
+class RatsEvent(EveryDayPayEvent):
+    everyday_pay = 10
+    min_length = 3
+    max_length = 7
+    passed_days = 0
+    length = 0
+
+    name = "Rats In Warehouse"
+
+    def __init__(self):
+        super().__init__()
+
+    def show_cost(self):
+        print("Крысы на складе:", self.everyday_pay)
+
+    def make(self):
+        print("Завелись крысы на складе!:", self.length, "дней")
+        print("Каждый ход с вашей казны будет поступать по 10 золота на покупки химикатов")
+        self.player.increase_everyday_pay(self.everyday_pay)
+
+    def say_last_words(self):
+        print("Крысы на складе вымерли!")

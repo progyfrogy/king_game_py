@@ -9,6 +9,7 @@ import random
 
 from Events import *
 from Player import *
+import os
 
 
 # Test
@@ -19,6 +20,8 @@ def test():
     print("////////////////ИГРА НАЧАЛАСЬ////////////////")
 
     for i in range(0, 100):
+        os.system("cls")
+
         print("")
         print("День:", i + 1, "7:00")
         print("")
@@ -71,6 +74,8 @@ class GameController:
         self.events.append(DyingCitizenEvent())
         self.events.append(War())
         self.everyday_pay_events.append(War())
+        self.events.append(RatsEvent())
+        self.everyday_pay_events.append(RatsEvent())
 
     def __init__(self):
         self.fill_events_list()
