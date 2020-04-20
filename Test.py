@@ -67,10 +67,12 @@ class GameController:
         # Создание игрока
         pl = Player()
         # Инициализация ивентов
+        '''
         self.events.append(VulcanoEvent())
         self.events.append(RaidEvent())
         self.events.append(FestEvent())
         self.events.append(CitizensPaymentIncreaseEvent())
+        '''
         self.events.append(DyingCitizenEvent())
         self.events.append(War())
         self.everyday_pay_events.append(War())
@@ -89,16 +91,18 @@ class GameController:
         EveryDayPayEvent и не находится в списке активных ивентов,
         то добавляем желаемый ивент в список активных
         """
+        """
+        Если сгенерированный ивент не является потомком класса
+        EveryDayPayEvent, то просто запускаем, а иначе - рекурсивный вызов данной функции
+        """
         if isinstance(random_event, EveryDayPayEvent) and not is_class_in_list(self.active_everyday_pay_events,
                                                                                random_event):
             self.active_everyday_pay_events.append(random_event)
             random_event.make()
-        """
-        Если сгенерированный ивент не является потомком класса
-        EveryDayPayEvent, то просто запускаем, а иначе - ничего не делаем
-        """
-        if not isinstance(random_event, EveryDayPayEvent):
+        elif not isinstance(random_event, EveryDayPayEvent):
             random_event.make()
+        else:
+            self.make_random_event()
 
     def start_command_cycle(self):
         print("Посмотреть деньги в казне - money")
@@ -146,6 +150,7 @@ class GameController:
             if event.is_passed():
                 self.active_everyday_pay_events.remove(event)
                 event.say_last_words()
+                Player().decrease_everyday_pay(event.everyday_pay)
 
     def increment_everyday_events(self):
         for event in self.active_everyday_pay_events:

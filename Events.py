@@ -197,7 +197,7 @@ class War(EveryDayPayEvent):
         print("Каждый ход с вашей казны будет поступать по 25 золота на содержание войск")
         self.player.increase_everyday_pay(self.everyday_pay)
 
-    def say_last_words():
+    def say_last_words(self):
         print("Война закончилась!")
 
 

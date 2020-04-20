@@ -51,6 +51,9 @@ class Player:
     def increase_everyday_pay(self, val):
         self._everyday_pay += val
 
+    def decrease_everyday_pay(self, val):
+        self._everyday_pay -= val
+
     def pay_everyday_pay(self):
         self._money -= self._everyday_pay
         if self._everyday_pay > 0:
