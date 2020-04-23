@@ -2,9 +2,11 @@
 Authored by
 kirprogfrog@gmail.com
 """
+import os
 
 
 class Player:
+    _login = 'Kirill'
     _passed_days = 0
     _money = 1000
     _carma = 50
@@ -17,6 +19,21 @@ class Player:
         if cls.instance is None:
             cls.instance = object.__new__(cls)
         return cls.instance
+
+    i = 1
+
+    def save_score(self):
+        print("Trying to find file", "score" + str(self.i) + ".txt")
+        if os.path.exists("score" + str(self.i) + ".txt"):
+            print("File score" + str(self.i) + ".txt was found, so testing score" + str(self.i + 1) + ".txt")
+            self.i += 1
+            self.save_score()
+        else:
+            print("File score" + str(self.i) + ".txt doesn't exist so we'll save score there")
+            with open("score" + str(self.i) + ".txt", "w") as f:
+                f.write(Player().get_login() + "\n" + "DAYS:" + str(Player().get_passed_days()) +
+                        "\n" + "MONEY:" + str(Player().get_money()) + "\n" + "CARMA:" + str(Player().get_carma()))
+                f.close()
 
     def increase_money(self, num):
         self._money += num
@@ -32,6 +49,7 @@ class Player:
         if self._money < num:
             print("Нет золота БАН")
             print("КОНЕЦ ИГРЫ")
+            self.save_score()
             exit()
         else:
             self._money -= num
@@ -42,6 +60,7 @@ class Player:
         if self._carma < num:
             print("Доверия вашего народа упало до 0. В скором времени произойдёт смена власти..")
             print("КОНЕЦ ИГРЫ")
+            self.save_score()
             exit()
         else:
             self._carma -= num
@@ -71,3 +90,9 @@ class Player:
 
     def set_passed_days(self, val):
         self._passed_days = val
+
+    def get_login(self):
+        return self._login
+
+    def set_login(self, val):
+        self._login = val

@@ -1,0 +1,4 @@
+Kirill
+DAYS:16
+MONEY:355
+CARMA:70

@@ -37,7 +37,7 @@ def test():
         print("День:", i + 1, "22:00")
         print("")
 
-        Player().set_passed_days(Player().get_passed_days() + 1)
+        Player().set_passed_days(i + 1)
 
         controller.increment_everyday_events()
 
@@ -140,9 +140,12 @@ class GameController:
                         pay_event.show_cost()
             elif inp == 'days_of_war':
                 # Получаем активный War ивент(объект) из списка активных ивентов
-                war_event = self.active_everyday_pay_events[index_of_class_in_list(self.active_everyday_pay_events, War())]
+                war_event = self.active_everyday_pay_events[
+                    index_of_class_in_list(self.active_everyday_pay_events, War())]
 
                 print("Кол-во дней до окончания войны: ", war_event.length - war_event.passed_days)
+            elif inp == 'decrease_money':
+                Player().decrease_money(1000)
             else:
                 print("Не могу вас понять, ваше сиятельство")
 
