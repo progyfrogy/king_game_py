@@ -5,6 +5,7 @@ kirprogfrog@gmail.com
 
 
 class Player:
+    _passed_days = 0
     _money = 1000
     _carma = 50
     _everyday_pay = 0
@@ -64,3 +65,9 @@ class Player:
 
     def get_carma(self):
         return self._carma
+
+    def get_passed_days(self):
+        return self._passed_days
+
+    def set_passed_days(self, val):
+        self._passed_days = val

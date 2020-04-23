@@ -1,6 +1,6 @@
 """
-Authored by
 kirprogfrog@gmail.com
+Authored by
 """
 
 import random
@@ -223,3 +223,27 @@ class RatsEvent(EveryDayPayEvent):
 
     def say_last_words(self):
         print("Крысы на складе вымерли!")
+
+
+class Chuma(EveryDayPayEvent):
+    everyday_pay = 5
+    min_length = 20
+    max_length = 30
+    passed_days = 0
+    length = 0
+
+    name = "Every Day Pay Event"
+
+    def __init__(self):
+        super().__init__()
+
+    def show_cost(self):
+        print("Чума в государстве:", self.everyday_pay, "золота в день")
+
+    def make(self):
+        print("Торговый караван, прибывший в город занёс какую-то заразу!:", self.length, "дней")
+        print("Каждый ход с вашей казны будет поступать по", self.everyday_pay, "золота на покупку лекарств")
+        self.player.increase_everyday_pay(self.everyday_pay)
+
+    def say_last_words(self):
+        print("Чума закончилась!")

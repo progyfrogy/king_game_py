@@ -37,6 +37,8 @@ def test():
         print("День:", i + 1, "22:00")
         print("")
 
+        Player().set_passed_days(Player().get_passed_days() + 1)
+
         controller.increment_everyday_events()
 
         controller.start_command_cycle()
@@ -76,6 +78,8 @@ class GameController:
         self.everyday_pay_events.append(War())
         self.events.append(RatsEvent())
         self.everyday_pay_events.append(RatsEvent())
+        self.events.append(Chuma())
+        self.everyday_pay_events.append(Chuma())
 
     def __init__(self):
         self.fill_events_list()
